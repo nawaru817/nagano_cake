@@ -14,12 +14,18 @@
     <tbody>
       <% @items = Item.all %>
       <% @items.each do |item| %>
+      <% a = item.genre_id %>
       <tr>
         <td><%= item.id %></td>
-        <td><%= item.name %></td>
-        <td><%= item.price %></td>
-        <td><%= item.genre_id %></td>
-
+        <td><%= link_to item.name, admin_item_path(item) %></td>
+        <td><%= (item.price).to_s(:delimited) %></td>
+        <td><%= @genre[(item.genre_id) -1] %></td>
+        <td><% if item.is_active == true then %>
+              <%= "販売中" %>
+            <% else %>
+              <%= "販売停止中" %>
+            <% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>

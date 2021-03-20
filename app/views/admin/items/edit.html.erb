@@ -1,4 +1,4 @@
-<h1>商品新規登録</h1>
+<h1>商品編集</h1>
 <%= form_with model: [:admin,@item], local:true do |f| %>
   <h4>商品画像</h4>
   <%= f.attachment_field :image %>
@@ -11,11 +11,10 @@
   <h4>税抜価格</h4>
   <%= f.text_field :price %>
   <h4>ステータス</h4>
-  <%= f.radio_button :is_active, :true %>
+  <%= f.radio_button :is_active, true %>
   <%= "販売中" %>
-  <%= f.radio_button :is_active, :false %>
+  <%= f.radio_button :is_active, false %>
   <%= "販売停止中" %>
   <br>
-
-  <%= f.submit '新規登録' %>
+  <%= f.submit '変更を保存' %>
 <% end %>
