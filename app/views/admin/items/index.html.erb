@@ -14,7 +14,6 @@
     <tbody>
       <% @items = Item.all %>
       <% @items.each do |item| %>
-      <% a = item.genre_id %>
       <tr>
         <td><%= item.id %></td>
         <td><%= link_to item.name, admin_item_path(item) %></td>
