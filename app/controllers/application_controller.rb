@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:encrypted_password])
+  end
+
   before_action :authenticate_admin!
 
   def after_sign_in_path_for(resource)
