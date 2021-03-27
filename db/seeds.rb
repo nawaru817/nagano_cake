@@ -7,4 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #Admin.create(email: 'admin@test.com', encrypted_password: 'password')
 
-Order.create!(customer_id: '1', postal_code: '1114444', address: 'Ｊ県Ｊ市', name: '山田太郎', shipping_cost: '800', total_payment: '2800', payment_method: '0', status: '0')
+OrderDetail.create!(order_id: '1', item_id: '1', price: '2000', amount: '3', making_status: 0)

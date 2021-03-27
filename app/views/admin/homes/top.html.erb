@@ -11,18 +11,13 @@
       </tr>
     </thead>
     <tbody>
-      <% @customers = Customer.all %>
-      <% @customers.each do |customer| %>
+      <% @orders = Order.all %>
+      <% @orders.each do |order| %>
       <tr>
-        <td><%= customer.id %></td>
-        <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
-        <td><%= customer.email %></td>
-        <td><% if customer.is_deleted == true then %>
-              <%= "有効" %>
-            <% else %>
-              <%= "退会" %>
-            <% end %>
-        </td>
+        <td><%= link_to order.created_at, admin_order_path(order) %></td>
+        <td><%= order.name %></td>
+        <td><%= "個数" %></td>
+        <td><%= order.status %></td>
       </tr>
       <% end %>
     </tbody>
