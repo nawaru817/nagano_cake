@@ -32,9 +32,8 @@
         <td><%= ((order_detail.price * 1.1).floor).to_s(:delimited) %></td>
         <td><%= order_detail.amount %></td>
         <td><%= (((order_detail.price * 1.1).floor) * order_detail.amount).to_s(:delimited) %></td>
-        <%= form_with model: [:admin,@order_details], local:true do |f| %>
-          <td><%= select :order_detail, :making_status, OrderDetail.making_statuses.keys.to_a %><%= f.submit '更新' %></td></tr>
-        <% end %>
+        <td><%= select :order_detail, :making_status, OrderDetail.making_statuses.keys.to_a %></td>
+
       </tr>
       <% end %>
     </tbody>
