@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:encrypted_password])
   end
 
-  before_action :authenticate_admin!
+  
 
   def after_sign_in_path_for(resource)
     case resource
