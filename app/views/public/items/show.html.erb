@@ -5,7 +5,7 @@
 <div>￥ <%= ((@item.price * 1.1).floor).to_s(:delimited) %> (税込) </div><br>
 
 <%= form_with(model: @cart_item, local: true) do |f| %>
-
+    <%= f.hidden_field :item_id, value: @item.id %>
     <%= f.select :amount, {'1':1, '2':2, '3':3, '4':4, '5':5}, { include_blank: '個数選択'} %><br>
     <%= f.submit 'カートに入れる' %>
 
