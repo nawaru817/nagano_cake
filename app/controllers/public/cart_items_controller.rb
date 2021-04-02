@@ -3,18 +3,26 @@ class Public::CartItemsController < ApplicationController
   def index
     @cart_items = CartItem.all
     @item_name = Item.pluck(:name)
-    @item_image = Item.pluck(:image_id)
     @items = Item.all
     @item_price = Item.pluck(:price)
   end
 
   def update
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(cart_item_params)
+    redirect_to cart_items_path
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy!
+    redirect_to cart_items_path
   end
 
   def destroy_all
+    @cart_item_all = CartItem.find(current_customer.id)
+    @cart_item_all.destroy
+    redirect_to cart_items_path
   end
 
   def create
