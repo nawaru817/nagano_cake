@@ -1,0 +1,57 @@
+<h1>注文情報確認</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% sum = 0 %>
+      <% @cart_items.each do |cart_item| %>
+        <% if cart_item.customer_id == current_customer.id then %>
+          <tr>
+            <td><%= attachment_image_tag @items[(cart_item.item_id)-1], :image, :fill, 50, 50, fallback: "no_image.jpg" %>
+                <%= @item_name[(cart_item.item_id) -1] %></td>
+            <td><%= (@item_price[(cart_item.item_id) -1]).to_s(:delimited) %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= sum_total = ((@item_price[(cart_item.item_id) -1]) * cart_item.amount).to_s(:delimited) %></td>
+          </tr>
+          <% sum_total = ((@item_price[(cart_item.item_id) -1]) * cart_item.amount) %>
+          <% sum += sum_total %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= form_with model: @order, url: orders_path, local:true do |f| %>
+
+  <%= hidden_field_tag :customer_id, current_customer.id %>
+  <%= hidden_field_tag :postal_code, @order.postal_code %>
+  <%= hidden_field_tag :address, @order.address %>
+  <%= hidden_field_tag :name, @order.name %>
+  <%= hidden_field_tag :payment_method, @order.payment_method %>
+  
+  <table>
+    <thead>
+      <tr><th>送料</th><td><%= @order.shipping_cost = 800 %><%= hidden_field_tag :shipping_cost, @order.shipping_cost %></td></tr>
+      <tr><th>商品合計</th><td><%= sum.to_s(:delimited) %></td></tr>
+      <tr><th>請求金額</th><td><% @order.total_payment = (@order.shipping_cost + sum) %><%= (@order.total_payment).to_s(:delimited) %><%= hidden_field_tag :total_payment, @order.total_payment %></td></tr>
+    </thead>
+    <th colspan="2"></th>
+  </table>
+
+  <div>支払方法 <%= @order.payment_method %></div>
+  <br>
+  <div>
+    お届け先 <%= "〒" + @order.postal_code + " " + @order.address %><br>
+    <%= @order.name %>
+  </div>
+
+  <%= f.submit "注文を確定する" %>
+
+<% end %>

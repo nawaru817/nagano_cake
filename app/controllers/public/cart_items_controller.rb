@@ -20,8 +20,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
-    @cart_item_all = CartItem.find(current_customer.id)
-    @cart_item_all.destroy
+    CartItem.where(customer_id: current_customer.id).destroy_all
     redirect_to cart_items_path
   end
 
