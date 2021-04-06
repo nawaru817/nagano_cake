@@ -8,9 +8,6 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @cart_items = CartItem.all
-    @item_name = Item.pluck(:name)
-    @items = Item.all
-    @item_price = Item.pluck(:price)
   end
 
   def complete
@@ -19,10 +16,26 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(complete_order_params)
     @order.save!
+
+    @cart_items = CartItem.all
+    @cart_items.each do |cart_item|
+      if cart_item.customer_id == current_customer.id then
+        @order_detail = OrderDetail.new(order_detail_params)
+        @order_detail.order_id = @order.id
+        @order_detail.item_id = cart_item.item.id
+        @order_detail.price = cart_item.item.price
+        @order_detail.amount = cart_item.amount
+        @order_detail.making_status = 1
+        @order_detail.save!
+      end
+    end
+
     redirect_to orders_complete_path
   end
 
   def index
+    @orders = Order.all
+    @order_details = OrderDetail.all
   end
 
   def show
@@ -37,5 +50,11 @@ class Public::OrdersController < ApplicationController
   def complete_order_params
     params.permit(:postal_code, :customer_id, :address, :name, :shipping_cost, :total_payment, :payment_method)
   end
+
+  def order_detail_params
+    params.permit(:order_id, :item_id, :price, :amount)
+  end
+
+
 
 end

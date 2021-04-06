@@ -2,9 +2,6 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = CartItem.all
-    @item_name = Item.pluck(:name)
-    @items = Item.all
-    @item_price = Item.pluck(:price)
   end
 
   def update
@@ -36,5 +33,6 @@ class Public::CartItemsController < ApplicationController
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :customer_id, :amount)
   end
+
 
 end

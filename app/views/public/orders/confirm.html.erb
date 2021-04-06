@@ -15,13 +15,13 @@
       <% @cart_items.each do |cart_item| %>
         <% if cart_item.customer_id == current_customer.id then %>
           <tr>
-            <td><%= attachment_image_tag @items[(cart_item.item_id)-1], :image, :fill, 50, 50, fallback: "no_image.jpg" %>
-                <%= @item_name[(cart_item.item_id) -1] %></td>
-            <td><%= (@item_price[(cart_item.item_id) -1]).to_s(:delimited) %></td>
+            <td><%= attachment_image_tag cart_item.item, :image, :fill, 50, 50, fallback: "no_image.jpg" %>
+                <%= cart_item.item.name %></td>
+            <td><%= (cart_item.item.price).to_s(:delimited) %></td>
             <td><%= cart_item.amount %></td>
-            <td><%= sum_total = ((@item_price[(cart_item.item_id) -1]) * cart_item.amount).to_s(:delimited) %></td>
+            <td><%= sum_total = (cart_item.item.price * cart_item.amount).to_s(:delimited) %></td>
           </tr>
-          <% sum_total = ((@item_price[(cart_item.item_id) -1]) * cart_item.amount) %>
+          <% sum_total = (cart_item.item.price * cart_item.amount) %>
           <% sum += sum_total %>
         <% end %>
       <% end %>
@@ -35,7 +35,7 @@
   <%= hidden_field_tag :address, @order.address %>
   <%= hidden_field_tag :name, @order.name %>
   <%= hidden_field_tag :payment_method, @order.payment_method %>
-  
+
   <table>
     <thead>
       <tr><th>送料</th><td><%= @order.shipping_cost = 800 %><%= hidden_field_tag :shipping_cost, @order.shipping_cost %></td></tr>
