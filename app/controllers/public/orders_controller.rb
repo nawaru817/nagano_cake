@@ -15,6 +15,7 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(complete_order_params)
+    @order.status = 0
     @order.save!
 
     @cart_items = CartItem.all
@@ -39,6 +40,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.all
   end
 
   private
@@ -48,7 +51,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def complete_order_params
-    params.permit(:postal_code, :customer_id, :address, :name, :shipping_cost, :total_payment, :payment_method)
+    params.permit(:postal_code, :customer_id, :address, :name, :shipping_cost, :total_payment, :payment_method, :status)
   end
 
   def order_detail_params
