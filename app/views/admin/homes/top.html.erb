@@ -11,12 +11,19 @@
       </tr>
     </thead>
     <tbody>
-      <% @orders = Order.all %>
       <% @orders.each do |order| %>
+        <% sum = 0 %>
       <tr>
         <td><%= link_to order.created_at, admin_order_path(order) %></td>
         <td><%= order.name %></td>
-        <td><%= "個数" %></td>
+        <td>
+          <% @order_details.each do |order_detail| %>
+            <% if order_detail.order_id == order.id then %>
+              <% sum += order_detail.amount %>
+            <% end %>
+          <% end %>
+          <%= sum %>
+        </td>
         <td><%= order.status %></td>
       </tr>
       <% end %>
