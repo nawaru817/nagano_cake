@@ -12,7 +12,6 @@
       </tr>
     </thead>
     <tbody>
-      <% @items = Item.all %>
       <% @items.each do |item| %>
       <tr>
         <td><%= item.id %></td>
@@ -27,5 +26,6 @@
         </td>
       </tr>
       <% end %>
+      <%= paginate @items %>
     </tbody>
   </table>

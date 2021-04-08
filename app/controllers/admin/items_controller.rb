@@ -12,7 +12,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = Item.page(params[10])
     @genre = Genre.pluck(:name)
   end
 

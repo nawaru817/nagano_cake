@@ -5,3 +5,5 @@
   <%= item.name %><br>
   ￥<%= (item.price).to_s(:delimited) %><br>
 <% end %>
+
+<%= paginate @items %>

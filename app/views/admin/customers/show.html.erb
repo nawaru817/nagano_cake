@@ -20,4 +20,4 @@
   </table>
 
   <%= link_to "編集する", edit_admin_customer_path(params[:id]) %>
-  <%= link_to "注文履歴一覧を見る",
+  <%= link_to "注文履歴一覧を見る", admin_root_path(order_sort: params[:id]) %>

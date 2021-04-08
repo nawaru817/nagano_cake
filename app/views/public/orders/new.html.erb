@@ -3,21 +3,29 @@
 <%= form_with model: @order, url: orders_confirm_path, local:true do |f| %>
   <h4>支払方法</h4>
   <div class="field">
-    <%= f.radio_button :payment_method, "クレジットカード" %><%= f.label "クレジットカード" %>
-    <%= f.radio_button :payment_method, "銀行振込" %><%= f.label "銀行振込" %>
+    <%= f.radio_button :payment_method, "クレジットカード" %><%= f.label :payment_method, "クレジットカード" %>
+    <%= f.radio_button :payment_method, "銀行振込" %><%= f.label :payment_method, "銀行振込" %>
   </div>
   <h4>お届け先</h4>
 
-  <!--<%= f.radio_button(:postal_code, @customer.postal_code) %><%= f.label "ご自身の住所" %><br>-->
+  <%= f.radio_button(:select_address, '0') %><%= f.label "ご自身の住所" %><br>
   <div>
     <%= "〒" + @customer.postal_code + " " + @customer.address %><br>
     <%= @customer.last_name + @customer.first_name %>
   </div>
   <br>
-  <h4>新しいお届け先</h4>
+  <%= f.radio_button(:select_address, '1') %><%= f.label "新しいお届け先" %><br>
   <div>郵便番号(ハイフン無し) <%= f.text_field :postal_code %></div>
   <div>住所 <%= f.text_field :address %></div>
   <div>宛名 <%= f.text_field :name %></div>
 
   <%= f.submit '確認画面へ進む' %>
 <% end %>
+
+<%= form_tag(controller: "orders", action: "new") do %>
+    <%= radio_button_tag("r1", "radio 1") %>
+    <%= label_tag("r1_radio_1", "Radio Button 1") %><br>
+    <%= radio_button_tag("r1", "radio 2") %>
+    <%= label_tag("r1_radio_2", "Radio Button 2") %><br>
+    <%= submit_tag("Click") %>
+<% end%>
