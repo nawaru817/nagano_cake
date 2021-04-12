@@ -1,13 +1,32 @@
-<div>
-  ようこそ、ながのCAKEへ！<br>
-  このサイトは、ケーキ販売のECサイトになります。<br>
-  会員でない方も商品の閲覧はできますが、<br>
-  購入には会員登録が必要になります。
-</div>
 
-<h1>新着商品</h1>
-<% @items.each do |item| %>
-  <%= attachment_image_tag item, :image, :fill, 100, 100, fallback: "no_image.jpg" %><br>
-  <%= item.name %><br>
-  ￥<%= (item.price).to_s(:delimited) %><br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <div style="position: relative; display:inline-block; margin-left: 60px">
+        <%= image_tag 'no_image.jpg', size: '620x390' %>
+          <div style="position: absolute; top: 0; left: 0; max-width: 100%; max-height: 100%; padding: 150px">
+            <div class="bg-white">
+              ようこそ、ながのCAKEへ！<br>
+              このサイトは、ケーキ販売のECサイトになります。<br>
+              会員でない方も商品の閲覧はできますが、<br>
+              購入には会員登録が必要になります。
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-5"></div>
+  </div>
+  <div class="row">
+    <h1>新着商品</h1>
+  </div>
+  <div class="row">
+      <% @items.each do |item| %>
+        <div class="card col-md-3 border-0">
+          <%= attachment_image_tag item, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
+          <%= item.name %>
+          <div>￥<%= (item.price).to_s(:delimited) %></div>
+        </div>
+      <% end %>
+  </div>
+</div>

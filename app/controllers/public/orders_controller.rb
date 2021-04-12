@@ -6,8 +6,17 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params)
     @cart_items = CartItem.all
+    if @order.select_address == '0' then
+      redirect_to orders_path
+      @customer = Customer.find(current_customer.id)
+      @order.postal_code = @customer.postal_code
+      @order.address = @customer.address
+
+    elsif [@order,params[:select_address]] == '1' then
+      @order = Order.new(order_params)
+
+    end
   end
 
   def complete
@@ -47,7 +56,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:postal_code, :customer_id, :address, :name, :shipping_cost, :total_payment, :payment_method)
+    params.require(:order).permit(:postal_code, :customer_id, :address, :name, :shipping_cost, :total_payment, :payment_method, :select_address)
   end
 
   def complete_order_params

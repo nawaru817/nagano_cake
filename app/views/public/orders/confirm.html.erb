@@ -30,17 +30,11 @@
 
 <%= form_with model: @order, url: orders_path, local:true do |f| %>
 
-  <%= hidden_field_tag :customer_id, current_customer.id %>
-  <%= hidden_field_tag :postal_code, @order.postal_code %>
-  <%= hidden_field_tag :address, @order.address %>
-  <%= hidden_field_tag :name, @order.name %>
-  <%= hidden_field_tag :payment_method, @order.payment_method %>
-
   <table>
     <thead>
-      <tr><th>送料</th><td><%= @order.shipping_cost = 800 %><%= hidden_field_tag :shipping_cost, @order.shipping_cost %></td></tr>
+      <tr><th>送料</th><td><%= @order.shipping_cost = 800 %></td></tr>
       <tr><th>商品合計</th><td><%= sum.to_s(:delimited) %></td></tr>
-      <tr><th>請求金額</th><td><% @order.total_payment = (@order.shipping_cost + sum) %><%= (@order.total_payment).to_s(:delimited) %><%= hidden_field_tag :total_payment, @order.total_payment %></td></tr>
+      <tr><th>請求金額</th><td><% @order.total_payment = (@order.shipping_cost + sum) %><%= (@order.total_payment).to_s(:delimited) %></td></tr>
     </thead>
     <th colspan="2"></th>
   </table>
@@ -51,6 +45,14 @@
     お届け先 <%= "〒" + @order.postal_code + " " + @order.address %><br>
     <%= @order.name %>
   </div>
+
+  <%= hidden_field_tag :customer_id, current_customer.id %>
+  <%= hidden_field_tag :postal_code, @order.postal_code %>
+  <%= hidden_field_tag :address, @order.address %>
+  <%= hidden_field_tag :name, @order.name %>
+  <%= hidden_field_tag :payment_method, @order.payment_method %>
+  <%= hidden_field_tag :shipping_cost, @order.shipping_cost %>
+  <%= hidden_field_tag :total_payment, @order.total_payment %>
 
   <%= f.submit "注文を確定する" %>
 
