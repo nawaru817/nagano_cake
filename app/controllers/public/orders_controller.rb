@@ -7,6 +7,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = CartItem.all
+
     if @order.select_address == '0' then
       redirect_to orders_path
       @customer = Customer.find(current_customer.id)

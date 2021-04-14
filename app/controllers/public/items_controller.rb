@@ -1,7 +1,7 @@
 class Public::ItemsController < ApplicationController
 
   def index
-    @items = Item.page(params[8]).reverse_order
+    @items = Item.page(params[:page]).per(8).reverse_order.per(8)
   end
 
   def show
