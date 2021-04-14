@@ -21,12 +21,13 @@
     <h1>新着商品</h1>
   </div>
   <div class="row">
-      <% @items.each do |item| %>
+      <% @items.each_with_index do |item,i| %>
         <div class="card col-md-3 border-0">
           <%= attachment_image_tag item, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
           <%= item.name %>
           <div>￥<%= (item.price).to_s(:delimited) %></div>
         </div>
+        <% break if i== 3 %>
       <% end %>
   </div>
 </div>
