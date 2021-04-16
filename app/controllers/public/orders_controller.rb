@@ -1,5 +1,7 @@
 class Public::OrdersController < ApplicationController
 
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
     @customer = Customer.find(current_customer.id)
@@ -43,6 +45,7 @@ class Public::OrdersController < ApplicationController
       end
     end
 
+    CartItem.where(customer_id: current_customer.id).destroy_all
     redirect_to orders_complete_path
   end
 
