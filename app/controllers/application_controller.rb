@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  before_action :authenticate_customer!,except: [:top,:about]
-
 
   protected
 
@@ -19,7 +17,7 @@ class ApplicationController < ActionController::Base
     if resource == :customer
         root_path
     elsif resource == :admin
-        new_admin_session_path
+        new__session_path
     else
         root_path
     end

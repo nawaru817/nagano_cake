@@ -21,7 +21,7 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     withdraw = Customer.find(current_customer.id)
-    withdraw.is_deleted = false
+    withdraw.is_deleted = true
     withdraw.update!(withdraw_params)
     redirect_to destroy_customer_session_path
   end
