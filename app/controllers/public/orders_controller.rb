@@ -45,7 +45,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.order(id: "DESC").page(params[:page]).per(6)
     @order_details = OrderDetail.all
   end
 

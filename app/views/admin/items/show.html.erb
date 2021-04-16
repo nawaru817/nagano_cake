@@ -1,21 +1,44 @@
-<h1>商品詳細</h1>
-
-<%= attachment_image_tag @item, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
-<table>
-    <thead>
-      <tr><th>商品名</th><td><%= @item.name %></td></tr>
-      <tr><th>商品説明</th><td><%= @item.introduction %></td></tr>
-      <tr><th>ジャンル</th><td><%= @genre[(@item.genre_id) -1] %></td></tr>
-      <tr><th>税抜価格<br>(税込価格)</th><td><%= (@item.price).to_s(:delimited) %> (<%= ((@item.price * 1.1).floor).to_s(:delimited) %>) 円</td></tr>
-      <tr><th>ステータス</th>
-          <td><% if @item.is_active == true then %>
-              <%= "販売中" %>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-3"></div>
+    <div class="col-9"><h4 class="d-inline" style="background-color: #dcdcdc">　商品詳細　</h4></div>
+  </div>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-4">
+      <%= attachment_image_tag @item, :image, :fill, 350, 200, fallback: "no_image.jpg" %><br>
+    </div>
+    <table class="table table-borderless col-4">
+      <tbody>
+        <tr>
+          <th scope="row">商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th scope="row">ジャンル</th>
+          <td><%= @genre[(@item.genre_id) -1] %></td>
+        </tr>
+        <tr>
+          <th scope="row"><div>税抜価格</div><div>(税込価格)</div></th>
+          <td class="align-middle"><%= (@item.price).to_s(:delimited) %> (<%= ((@item.price * 1.1).floor).to_s(:delimited) %>) 円</td>
+        </tr>
+        <tr>
+          <th scope="row">ステータス</th>
+          <td>
+            <% if @item.is_active == true then %>
+              <div class="text-success"><strong>販売中</strong></div>
             <% else %>
-              <%= "販売停止中" %>
+              <div class="text-secondary"><strong>販売停止中</strong></div>
             <% end %>
           </td>
-      </tr>
-      <th colspan="2"></th>
-  </table>
-
-  <%= link_to "編集する", edit_admin_item_path(params[:id]) %>
+        </tr>
+      </tbody>
+    </table>
+    <div class="col-7"></div>
+    <div><%= link_to "編集する", edit_admin_item_path(params[:id]), class: 'btn btn-success' %></div>
+  </div>
+</div>

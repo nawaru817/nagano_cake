@@ -1,13 +1,17 @@
-<h1>会員一覧</h1>
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-1"></div>
+    <div class="col-10"><h4 class="d-inline" style="background-color: #dcdcdc">　会員一覧　</h4></div>
+    <a class="btn btn-outline-secondary rounded-circle p-0" href="/admin/items/new" style="width:3rem;height:3rem;"><h2>＋</h2></a>
+  </div>
 
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-light">
       <tr>
         <th>会員ID</th>
         <th>氏名</th>
         <th>メールアドレス</th>
         <th>ステータス</th>
-        <th colspan="4"></th>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +21,9 @@
         <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
         <td><%= customer.email %></td>
         <td><% if customer.is_deleted == true then %>
-              <%= "有効" %>
+              <div class="text-success"><strong>有効</strong></div>
             <% else %>
-              <%= "退会" %>
+              <div class="text-secondary"><strong>退会</strong></div>
             <% end %>
         </td>
       </tr>
@@ -27,3 +31,5 @@
       <%= paginate @customers %>
     </tbody>
   </table>
+
+  </div>

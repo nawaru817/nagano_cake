@@ -1,21 +1,54 @@
-<h1>商品新規登録</h1>
-<%= form_with model: [:admin,@item], local:true do |f| %>
-  <h4>商品画像</h4>
-  <%= f.attachment_field :image %>
-  <h4>商品名</h4>
-  <%= f.text_field :name %>
-  <h4>商品説明</h4>
-  <%= f.text_area :introduction %>
-  <h4>ジャンル</h4>
-  <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-  <h4>税抜価格</h4>
-  <%= f.text_field :price %>
-  <h4>ステータス</h4>
-  <%= f.radio_button :is_active, :true %>
-  <%= "販売中" %>
-  <%= f.radio_button :is_active, :false %>
-  <%= "販売停止中" %>
-  <br>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-2"></div>
+    <h4 class="d-inline" style="background-color: #dcdcdc">　商品新規登録　</h4>
+  </div>
 
-  <%= f.submit '新規登録' %>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+<%= form_with model: [:admin,@item], local:true do |f| %>
+
+  <table class="table table-sm table-borderless col-10">
+  <tbody>
+    <tr>
+      <th scope="row"><%= f.label "商品画像" %></th>
+      <td><%= f.attachment_field :image %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label "商品名" %></th>
+      <td><%= f.text_field :name, :size => "35" %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label "商品説明" %></th>
+      <td><%= f.text_area :introduction, :size => "38x5" %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label "ジャンル" %></th>
+      <td><%= f.collection_select :genre_id, Genre.all, :id, :name %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label "税抜価格" %></th>
+      <td><%= f.text_field :price, :size => "35" %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= f.label "ステータス" %></th>
+      <td>
+        <%= f.radio_button :is_active, :true %>
+        <%= "販売中" %>
+        <%= f.radio_button :is_active, :false %>
+        <%= "販売停止中" %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td><span class="text-center"><%= f.submit "新規登録", class: 'btn btn-success' %></span></td>
+    </tr>
+  </tbody>
+</table>
+
 <% end %>
+</div>
+</div>
+
+</div>

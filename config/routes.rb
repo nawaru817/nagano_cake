@@ -30,10 +30,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :index, :show]
     post '/orders/confirm', to: 'orders#confirm'
 
+    patch '/customers/withdraw', to: 'customers#withdraw'
     resources :customers, only: [:edit, :update]
     get '/customers/mypage', to: 'customers#show'
     get '/customers/unsubscribe', to: 'customers#unsubscribe'
-    patch '/customers/withdraw', to: 'customers#withdraw'
 
   end
 

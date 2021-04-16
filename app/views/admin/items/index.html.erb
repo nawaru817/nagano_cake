@@ -1,14 +1,18 @@
-<h1>商品一覧</h1>
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-1"></div>
+    <div class="col-10"><h4 class="d-inline" style="background-color: #dcdcdc">　商品一覧　</h4></div>
+    <a class="btn btn-outline-secondary rounded-circle p-0" href="/admin/items/new" style="width:3rem;height:3rem;"><h2>＋</h2></a>
+  </div>
 
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-light">
       <tr>
         <th>商品ID</th>
         <th>商品名</th>
         <th>税抜価格</th>
         <th>ジャンル</th>
         <th>ステータス</th>
-        <th colspan="5"></th>
       </tr>
     </thead>
     <tbody>
@@ -19,9 +23,9 @@
         <td><%= (item.price).to_s(:delimited) %></td>
         <td><%= @genre[(item.genre_id) -1] %></td>
         <td><% if item.is_active == true then %>
-              <%= "販売中" %>
+              <div class="text-success"><strong>販売中</strong></div>
             <% else %>
-              <%= "販売停止中" %>
+              <div class="text-secondary"><strong>販売停止中</strong></div>
             <% end %>
         </td>
       </tr>
@@ -29,3 +33,5 @@
       <%= paginate @items %>
     </tbody>
   </table>
+
+  </div>

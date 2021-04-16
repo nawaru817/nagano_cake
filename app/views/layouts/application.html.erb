@@ -14,6 +14,7 @@
     <header class="shadow-sm mb-5" >
     <nav class="navbar navbar-expand-lg navbar-light mt-3 mb-3">
       <div class="container">
+        <a class="navbar-brand p-0" href="/"><%= image_tag('no_image.jpg', :size =>'300x50') %></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +34,7 @@
             <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %>
           </li>
           <li class="nav-item btn btn-outline-secondary p-0">
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+            <%= link_to "ログアウト", destroy_admin_session_path, class: 'nav-link text-dark' %>
           </li>
 
           <% elsif customer_signed_in? %>
@@ -49,7 +50,7 @@
             <%= link_to "カート", cart_items_path, class: 'nav-link text-dark' %>
           </li>
           <li class="nav-item btn btn-outline-secondary p-0">
-            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
+            <%= link_to "ログアウト", destroy_customer_session_path, class: 'nav-link text-dark' %>
           </li>
           <% else %>
           <li class="nav-item btn btn-outline-secondary p-0 mr-5">
