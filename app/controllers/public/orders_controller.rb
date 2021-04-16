@@ -6,15 +6,17 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @select_address = params[:order][:select_address]
     @cart_items = CartItem.all
 
-    if @order.select_address == '0' then
-      redirect_to orders_path
+    if @select_address == '0' then
+      @order = Order.new(order_params)
       @customer = Customer.find(current_customer.id)
       @order.postal_code = @customer.postal_code
       @order.address = @customer.address
+      @order.name = @customer.last_name + @customer.first_name
 
-    elsif [@order,params[:select_address]] == '1' then
+    elsif @select_address == '1' then
       @order = Order.new(order_params)
 
     end
