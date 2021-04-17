@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
         admin_items_path
 
       when Customer
-        items_path
+        customers_mypage_path
     end
   end
 
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     if resource == :customer
         root_path
     elsif resource == :admin
-        new__session_path
+        new_admin_session_path
     else
         root_path
     end
